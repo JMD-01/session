@@ -65,13 +65,11 @@ module.exports.ReAuth = function (email, password) {
                 token = null;
                 runAuth();
             } else {
-                console.log("Checker "+row.token)
                 token = row.token;
                 runAuth();
             }
         })
         function runAuth() {
-            console.log("Auth "+token)
             yggdrasil.auth({ user: email, pass: password, token: token }, function (_err, _data) {
                 if (_err) {
                     console.log(`[!] ${email} : ${_err} Possible Mojang Block.`)
@@ -95,7 +93,6 @@ module.exports.ReAuth = function (email, password) {
                                     return resolve(false)
                                 }
                                 //If clientToken not found
-                                console.log(row)
                                 if (!row) {
                                     sessionDB.run(`INSERT INTO clientToken (token) VALUES (?)`, [`${_data.clientToken}`]);
                                 } else {
@@ -119,7 +116,6 @@ module.exports.ReAuth = function (email, password) {
                                     return resolve(false)
                                 }
                                 //If clientToken not found
-                                console.log(row)
                                 if (!row) {
                                     sessionDB.run(`INSERT INTO clientToken (token) VALUES (?)`, [`${_data.clientToken}`]);
                                 } else {
