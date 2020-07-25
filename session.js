@@ -26,7 +26,7 @@ module.exports.checkSession = function (email) {
                 return resolve(false);
             }
             //Check session with email
-            yggdrasil.validate(session.accesToken, function (err) {
+            yggdrasil.validate(session.accessToken, function (err) {
                 if (!err) {
                     console.log(`[2/2] ${email} : Session valid.`);
                     return resolve({
